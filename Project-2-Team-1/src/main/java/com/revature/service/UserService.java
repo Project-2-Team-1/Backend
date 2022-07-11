@@ -11,11 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.data.ParkRepository;
 import com.revature.data.ReviewRepository;
 import com.revature.data.UserRepository;
 import com.revature.dto.Credentials;
 import com.revature.exceptions.AuthenticationException;
 import com.revature.exceptions.UserNotFoundException;
+import com.revature.models.Park;
 import com.revature.models.Review;
 import com.revature.models.User;
 
@@ -25,12 +27,14 @@ public class UserService {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	private UserRepository uRepo;
 	private ReviewRepository rRepo;
+	private ParkRepository pRepo;
 	
 	@Autowired
-	public UserService(UserRepository uRepo, ReviewRepository rRepo) {
+	public UserService(UserRepository uRepo, ReviewRepository rRepo, ParkRepository pRepo) {
 		super();
 		this.uRepo = uRepo;
 		this.rRepo = rRepo;
+		this.pRepo = pRepo;
 	}
 	
 	public User authenticate(Credentials creds) {
@@ -40,6 +44,8 @@ public class UserService {
 		return user;
 	}
 	
+	
+
 	@Transactional(readOnly=true)
 	public Set<User> findAll() {		
 		return uRepo.findAll().stream().collect(Collectors.toSet());
@@ -48,6 +54,11 @@ public class UserService {
 	@Transactional(readOnly=true)
 	public List<Review> findReviewByUserId(int id){
 		return rRepo.findByUserId();
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Park> findParkByUserId(int id){
+		return pRepo.findByUserId();
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
