@@ -40,6 +40,11 @@ public class User {
 	@Length(min=8)
 	private String password;
 	
+	private String email;
+	
+	@OneToMany(mappedBy="user_favorite_id")
+	private List<Park> favoriteParks;
+	
 	@OneToMany(mappedBy="user_id")
 	private List<Review> myReviews;
 

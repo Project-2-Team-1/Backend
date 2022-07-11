@@ -3,6 +3,7 @@ package com.revature.models;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,11 +44,11 @@ public class Review {
 	@Column(name="date_reviewed")
 	private Timestamp dateReviewed;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="park_id")
 	private int park_id;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	private int user_id;
 
