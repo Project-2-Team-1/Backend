@@ -33,6 +33,12 @@ public class User {
 	private int id;
 	
 	@NotBlank
+	private String firstName;
+	
+	@NotBlank
+	private String lastName;
+	
+	@NotBlank
 	@Length(min=2)
 	private String username;
 	
