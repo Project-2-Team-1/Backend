@@ -5,10 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.Credentials;
+import com.revature.exceptions.AuthenticationException;
 import com.revature.models.User;
 import com.revature.service.UserService;
 import com.revature.util.JwtTokenManager;
@@ -29,12 +31,13 @@ public class AuthController {
 	}
 	
 	@PostMapping
-	public User login(Credentials creds, HttpServletResponse response) {
+	public User login(@RequestBody Credentials creds, HttpServletResponse response) {
 		
-		User user = userv.authenticate(creds);
 		
-		if (user != null) {
+		
+		try {
 			
+			User user = userv.authenticate(creds);
 			String token = tokenManager.issueToken(user);
 			
 			response.addHeader("adventure-token", token);
@@ -42,7 +45,7 @@ public class AuthController {
 			response.setStatus(200);
 			
 			return user;
-		} else {
+		} catch (AuthenticationException e) {
 			response.setStatus(401);
 			return null;
 		}

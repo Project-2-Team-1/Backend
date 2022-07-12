@@ -33,10 +33,10 @@ public class UserService {
 		this.rRepo = rRepo;
 	}
 	
-	public User authenticate(Credentials creds) {
+	public User authenticate(Credentials creds) throws AuthenticationException {
 		
 		User user = uRepo.findUserByUsernameAndPassword(creds.getUsername(), creds.getPassword())
-	    .orElseThrow(AuthenticationException::new);
+				.orElseThrow(AuthenticationException::new);
 		return user;
 	}
 	
