@@ -30,6 +30,12 @@ public class AuthController {
 		this.tokenManager = tokenManager;
 	}
 	
+	/**
+	 * Log in to the application and receive a JWT
+	 * @param creds Request's body should be a JSON object with fields "username" and "password"
+	 * @param response
+	 * @return
+	 */
 	@PostMapping
 	public User login(@RequestBody Credentials creds, HttpServletResponse response) {
 		
