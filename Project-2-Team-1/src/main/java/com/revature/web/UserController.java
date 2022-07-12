@@ -23,16 +23,37 @@ public class UserController {
 	@Autowired
 	private UserService userv;
 	
+	/**
+	 * Retrieve a JSON list of all users
+	 * @return
+	 */
 	@GetMapping
 	public ResponseEntity<Set<User>> getAll() {
 		return ResponseEntity.ok(userv.findAll());
 	}
 	
+	/**
+	 * Retrieve a single user by ID
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
 		return ResponseEntity.ok(userv.getById(id));
 	}
 	
+	/**
+	 * Persist a new user to the application
+	 * @param u a JSON User object, for example:
+	 *  {
+	 *		"email": "email@gmail.com",
+	 *		"username": "username",
+	 *		"firstName": "User",
+	 *		"lastName": "Name",
+	 *		"password": "password123"
+	 *	}
+	 * @return
+	 */
 	@PostMapping
 	public ResponseEntity<User> register(@RequestBody User u) {
 		return ResponseEntity.ok(userv.add(u));

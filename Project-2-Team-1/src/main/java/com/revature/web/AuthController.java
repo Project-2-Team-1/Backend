@@ -38,11 +38,7 @@ public class AuthController {
 	 */
 	@PostMapping
 	public User login(@RequestBody Credentials creds, HttpServletResponse response) {
-		
-		
-		
 		try {
-			
 			User user = userv.authenticate(creds);
 			String token = tokenManager.issueToken(user);
 			

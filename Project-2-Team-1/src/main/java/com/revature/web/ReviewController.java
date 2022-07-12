@@ -59,7 +59,7 @@ public class ReviewController {
 	 * @param id
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity deleteReview(@PathVariable("id") int id) {
+	public ResponseEntity<String> deleteReview(@PathVariable("id") int id) {
 		try{
 			rserv.remove(id);
 		} catch (EmptyResultDataAccessException e) {
