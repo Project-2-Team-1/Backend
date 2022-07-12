@@ -44,13 +44,12 @@ public class Review {
 	@Column(name="date_reviewed")
 	private Timestamp dateReviewed;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="park_id")
-	private int park_id;
+	@Column(name="park_code")
+	private String parkCode;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="user_id")
-	private int user_id;
+	@ManyToOne
+	@JoinColumn(name="user_id", nullable=false)
+	private User user;
 
 	public Review(@NotBlank int rating, @Length(max = 300) String content, Timestamp dateReviewed) {
 		super();
