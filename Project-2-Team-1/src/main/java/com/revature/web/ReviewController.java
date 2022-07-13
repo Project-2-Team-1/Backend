@@ -1,5 +1,6 @@
 package com.revature.web;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class ReviewController {
 	@GetMapping
 	public ResponseEntity<Set<Review>> getAll() {
 		return ResponseEntity.ok(rserv.findAll());
+	}
+	
+	@GetMapping("/park/{parkCode}")
+	public ResponseEntity<List<Review>> getReviewsByParkCode(@PathVariable("parkCode") String parkCode) {
+		return ResponseEntity.ok(rserv.findByParkCode(parkCode));
 	}
 	
 	/**

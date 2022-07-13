@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,6 +55,16 @@ public class ReviewService {
 					.orElseThrow(()-> new ReviewNotFoundException("No review found with id " + id));
 		}
 		
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Review> findByParkCode(String parkCode) {
+		if(parkCode.length() != 4) {
+			log.warn("Park Code must be a four-letter code");
+			return null;
+		} else {
+			return rRepo.findByParkCodeOrderByDateReviewed(parkCode);
+		}
 	}
 	
 	
