@@ -14,8 +14,8 @@ public interface ReviewRepository extends JpaRepository<Review, Integer>{
 	
 	List<Review> findByOrderByDateReviewed();
 	
-	List<Review> findByUserId();
+	List<Review> findReviewByUserId(int userId);
 	
-	List<Review> findByParkId();
+	List<Review> findByParkCodeOrderByDateReviewed(String parkCode);
 
 }
