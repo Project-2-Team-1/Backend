@@ -43,8 +43,8 @@ public class UserService {
 	
 
 	@Transactional(readOnly=true)
-	public Set<User> findAll() {		
-		return uRepo.findAll().stream().collect(Collectors.toSet());
+	public List<User> findAll() {		
+		return uRepo.findAll().stream().collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly=true)
