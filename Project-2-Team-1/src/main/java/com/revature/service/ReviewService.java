@@ -29,8 +29,8 @@ public class ReviewService {
 	}
 	
 	@Transactional(readOnly=true)
-	public Set<Review> findAll() {		
-		return rRepo.findAll().stream().collect(Collectors.toSet());
+	public List<Review> findAll() {		
+		return rRepo.findAll().stream().collect(Collectors.toList());
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
