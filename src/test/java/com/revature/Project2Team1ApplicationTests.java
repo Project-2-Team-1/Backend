@@ -1,7 +1,7 @@
-package com.revature.service;
+package com.revature;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doNothing;
@@ -39,6 +39,7 @@ import com.revature.exceptions.ReviewNotFoundException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Review;
 import com.revature.models.User;
+import com.revature.service.ReviewService;
 import com.revature.service.UserService;
 
 

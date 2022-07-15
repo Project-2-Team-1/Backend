@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.revature.errorhandling.ApiError;
 import com.revature.errorhandling.ApiValidationError;
-import com.revature.exceptions.ParkNotFoundException;
 import com.revature.exceptions.ReviewNotFoundException;
 import com.revature.exceptions.UserNotFoundException;
 
@@ -55,15 +54,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex) {
 		
 		String error = "No User found with that username";
-		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex, error);
-		
-		return buildResponseEntity(apiError);	
-	}
-	
-	@ExceptionHandler(ParkNotFoundException.class) 
-	public ResponseEntity<Object> handleParkNotFoundException(ParkNotFoundException ex) {
-		
-		String error = "No Park found with that name";
 		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex, error);
 		
 		return buildResponseEntity(apiError);	
