@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,11 @@ public class UserService {
 		
 		User user = uRepo.findUserByUsernameAndPassword(creds.getUsername(), creds.getPassword())
 				.orElseThrow(AuthenticationException::new);
+		if (user != null) {
+			log.info("User successfully authenticated");
+		} else {
+			log.error("User not authenticated");
+		}
 		return user;
 	}
 	
@@ -44,34 +50,59 @@ public class UserService {
 
 	@Transactional(readOnly=true)
 	public List<User> findAll() {		
-		return uRepo.findAll().stream().collect(Collectors.toList());
+		List<User> list = uRepo.findAll().stream().collect(Collectors.toList());
+		if (list != null) {
+			log.info("User List successfully retrieved");
+		} else {
+			log.error("User List was not retrieved");
+		}
+		return list;
 	}
 	
 	@Transactional(readOnly=true)
 	public List<Review> findReviewByUserId(int id){
-		return rRepo.findReviewByUserId(id);
+		List<Review> reviews = rRepo.findReviewByUserId(id);
+		if (reviews != null) {
+			log.info("Reviews with User Id: " + id + " were successfully retrieved");
+		} else {
+			log.error("Reviews were not retrieved");
+		}
+		return reviews;
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public User add(User u) {
 		System.out.println(u);
-		return uRepo.save(u);
+		User newU = uRepo.save(u);
+		if (newU != null) {
+			log.info("New User successfully added");
+		} else {
+			log.error("New user not added");
+		}
+		return newU;
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED) 
 	public void remove(int id) {
-		uRepo.deleteById(id);
+		log.info("User with User Id: " + id + " was deleted");
+		uRepo.deleteById(id);		
 	}
 	
 	@Transactional(readOnly=true)
 	public User getByUsername(String username) {
-		return uRepo.findByUsername(username) 
-				.orElseThrow(() -> new UserNotFoundException("No user found with username " + username));
+		try {
+			Optional<User> u = uRepo.findByUsername(username);
+			log.info("User with username: " + username + " was successfully retrieved");
+			return u.get();
+		} catch (UserNotFoundException e) {
+			e.printStackTrace();
+			log.error("No user found with username " + username);
+			return null;
+		}
 	}
 	
 	@Transactional(readOnly=true)
-	public User getById(int id) {
-		
+	public User getById(int id) {		
 		if (id <= 0) {
 			log.warn("Id cannot be <= 0. Id passed was: {}", id);
 			return null;

@@ -28,7 +28,7 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<Set<User>> getAll() {
+	public ResponseEntity<List<User>> getAll() {
 		return ResponseEntity.ok(userv.findAll());
 	}
 	
