@@ -225,9 +225,7 @@ class Project2Team1ApplicationTests {
 	public void UserAuthenticate_Unsuccessful () {
 		
 		User e1 = new User ("Bruce", "Banner");
-		userv.add(e1);
-		
-		Credentials creds = new Credentials("Bruc", "Banner");
+		Credentials creds = new Credentials("Bruc", "Banner");	
 		
 		assertThrows(AuthenticationException.class, () -> userv.authenticate(creds));	
 		
@@ -237,7 +235,6 @@ class Project2Team1ApplicationTests {
 	public void UserAuthenticate_Successful() {
 		
 		Optional<User> e1 = Optional.of(new User ("Bruce", "Banner"));
-		userv.add(e1.get());
 		
 		Credentials creds = new Credentials("Bruce", "Banner");
 		
@@ -282,7 +279,6 @@ class Project2Team1ApplicationTests {
 	public void removeUser_Successful() {
 		
 		User dummyUser = new User(12, "spongebob", "squarepants", "sponge", "gary", "pineapple@mail.com", null); 
-		userv.add(dummyUser);
 		userv.remove(12);
 		assertThrows(UserNotFoundException.class, () -> userv.getById(12));
 		
@@ -357,7 +353,6 @@ class Project2Team1ApplicationTests {
 		
 		User dummyUser = new User(12, "spongebob", "squarepants", "sponge", "gary", "pineapple@mail.com", null);
 		Review dummy = new Review(1, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser); 
-		rserv.add(dummy);
 		rserv.remove(1);
 		assertThrows(ReviewNotFoundException.class, () -> rserv.getById(1));
 		

@@ -46,7 +46,7 @@ public class ReviewService {
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public Review add(Review r) {		
 		Review review = rRepo.save(r);
-		if (review != null) {
+		if (review.getId() > 0) {
 			log.info("New Review successfully added");
 		} else {
 			log.error("Review not added");

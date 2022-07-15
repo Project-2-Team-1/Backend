@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<sonar.organization>project-2-team-1</sonar.organization>
-  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	
 	<dependencies>
@@ -80,6 +80,12 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.2</version>
 			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.13.2</version> <!-- Or whatever JUnit you're using. -->
 		</dependency>
 	</dependencies>
 
