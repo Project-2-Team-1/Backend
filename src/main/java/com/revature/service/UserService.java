@@ -74,7 +74,7 @@ public class UserService {
 	public User add(User u) {
 		System.out.println(u);
 		User newU = uRepo.save(u);
-		if (newU != null) {
+		if (newU.getId() > 0) {
 			log.info("New User successfully added");
 		} else {
 			log.error("New user not added");
@@ -95,15 +95,15 @@ public class UserService {
 	
 	@Transactional(readOnly=true)
 	public User getByUsername(String username) {
-		try {
-			Optional<User> u = uRepo.findByUsername(username);
+	    Optional<User> u = uRepo.findByUsername(username);
+		if (u.isPresent()) {
 			log.info("User with username: " + username + " was successfully retrieved");
 			return u.get();
-		} catch (UserNotFoundException e) {
-			e.printStackTrace();
-			log.error("No user found with username " + username);
-			return null;
-		}
+		} else {
+			return u.orElseThrow(() -> new UserNotFoundException("No user found with username " + username));
+				
+			}
+		
 	}
 	
 	@Transactional(readOnly=true)
