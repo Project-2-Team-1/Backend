@@ -95,13 +95,13 @@ public class UserService {
 	
 	@Transactional(readOnly=true)
 	public User getByUsername(String username) {
-			Optional<User> u = uRepo.findByUsername(username);
-			if (u.isPresent()) {
+	    Optional<User> u = uRepo.findByUsername(username);
+		if (u.isPresent()) {
 			log.info("User with username: " + username + " was successfully retrieved");
 			return u.get();
-			} else {
-				u.orElseThrow(() -> new UserNotFoundException("No user found with username " + username));
-				return null;
+		} else {
+			return u.orElseThrow(() -> new UserNotFoundException("No user found with username " + username));
+				
 			}
 		
 	}
