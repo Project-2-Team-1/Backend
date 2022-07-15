@@ -82,6 +82,11 @@ public class UserService {
 		return newU;
 	}
 	
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public User updateUser(User u) {
+		return uRepo.save(u);
+	}
+	
 	@Transactional(propagation=Propagation.REQUIRED) 
 	public void remove(int id) {
 		log.info("User with User Id: " + id + " was deleted");
