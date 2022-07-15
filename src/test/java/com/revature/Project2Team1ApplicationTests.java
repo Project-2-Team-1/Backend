@@ -4,33 +4,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.Project2Team1Application;
 import com.revature.data.ReviewRepository;
 import com.revature.data.UserRepository;
 import com.revature.dto.Credentials;
