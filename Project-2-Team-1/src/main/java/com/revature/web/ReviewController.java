@@ -33,7 +33,7 @@ public class ReviewController {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<Set<Review>> getAll() {
+	public ResponseEntity<List<Review>> getAll() {
 		return ResponseEntity.ok(rserv.findAll());
 	}
 	
