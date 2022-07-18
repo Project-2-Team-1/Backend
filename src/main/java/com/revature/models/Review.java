@@ -31,6 +31,9 @@ public class Review {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@Column
+	private boolean saved = false;
+	
 	@Min(value = 0) @Max(value = 5)
 	private int rating;
 	
@@ -47,8 +50,9 @@ public class Review {
 	@JoinColumn(name="user_id", nullable=false)
 	private User user;
 
-	public Review(@NotBlank int rating, @Length(max = 300) String content, Timestamp dateReviewed) {
+	public Review(boolean saved, @NotBlank int rating, @Length(max = 300) String content, Timestamp dateReviewed) {
 		super();
+		this.saved = saved;
 		this.rating = rating;
 		this.content = content;
 		this.dateReviewed = dateReviewed;

@@ -184,8 +184,8 @@ class Project2Team1ApplicationTests {
 		
 		User dummyUser = new User(12, "spongebob", "squarepants", "sponge", "gary", "pineapple@mail.com", null);
 		
-		Review dummy = new Review(1, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser);
-		Review dummy2 = new Review(2, 1, "it sucked", new Timestamp(67070907578l), "ABCE", dummyUser);
+		Review dummy = new Review(1, true, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser);
+		Review dummy2 = new Review(2, true, 1, "it sucked", new Timestamp(67070907578l), "ABCE", dummyUser);
 		
 		List<Review> reviews = new ArrayList<Review>();
 		reviews.add(dummy);
@@ -205,8 +205,8 @@ class Project2Team1ApplicationTests {
 		
 		User dummyUser = new User(12, "spongebob", "squarepants", "sponge", "gary", "pineapple@mail.com", null);
 		
-		Review dummy = new Review(1, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser);
-		Review dummy2 = new Review(2, 1, "it sucked", new Timestamp(67070907578l), "ABCE", dummyUser);
+		Review dummy = new Review(1, true, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser);
+		Review dummy2 = new Review(2, true, 1, "it sucked", new Timestamp(67070907578l), "ABCE", dummyUser);
 		
 		List<Review> reviews = new ArrayList<Review>();
 		reviews.add(dummy);
@@ -287,9 +287,9 @@ class Project2Team1ApplicationTests {
 	@Test
 	public void getAllReviews_Successful() {
 		
-		Review e1 = new Review (3, "average", new Timestamp(6890758045l));
-		Review e2 = new Review (2, "poor", new Timestamp(68907580785l));
-		Review e3 = new Review (4, "good", new Timestamp(689075807895l));
+		Review e1 = new Review (true, 3, "average", new Timestamp(6890758045l));
+		Review e2 = new Review (false, 2, "poor", new Timestamp(68907580785l));
+		Review e3 = new Review (true, 4, "good", new Timestamp(689075807895l));
 
 		List<Review> list = new ArrayList<Review>();		
 		list.add(e1);
@@ -305,9 +305,9 @@ class Project2Team1ApplicationTests {
 	@Test
 	public void getAllReviews_Unsuccessful() {
 		
-		Review e1 = new Review (3, "average", new Timestamp(6890758045l));
-		Review e2 = new Review (2, "poor", new Timestamp(68907580785l));
-		Review e3 = new Review (4, "good", new Timestamp(689075807895l));
+		Review e1 = new Review (true, 3, "average", new Timestamp(6890758045l));
+		Review e2 = new Review (false, 2, "poor", new Timestamp(68907580785l));
+		Review e3 = new Review (true, 4, "good", new Timestamp(689075807895l));
 
 		List<Review> list = new ArrayList<Review>();		
 		list.add(e1);
@@ -323,7 +323,7 @@ class Project2Team1ApplicationTests {
 	@Test
 	public void addReview_Successful() {
 		
-		Review e1 = new Review (3, "average", new Timestamp(6890758045l));
+		Review e1 = new Review (true, 3, "average", new Timestamp(6890758045l));
 		
 		when(rRepo.save(e1)).thenReturn(e1);
 		
@@ -337,7 +337,7 @@ class Project2Team1ApplicationTests {
 	@Test
 	public void addReview_Unsuccessful() {
 		
-		Review e1 = new Review (3, "average", new Timestamp(6890758045l));
+		Review e1 = new Review (true, 3, "average", new Timestamp(6890758045l));
 		
 		when(rRepo.save(e1)).thenReturn(e1);
 		
@@ -352,7 +352,7 @@ class Project2Team1ApplicationTests {
 	public void removeReview_Successful() {
 		
 		User dummyUser = new User(12, "spongebob", "squarepants", "sponge", "gary", "pineapple@mail.com", null);
-		Review dummy = new Review(1, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser); 
+		Review dummy = new Review(1, true, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser);
 		rserv.remove(1);
 		assertThrows(ReviewNotFoundException.class, () -> rserv.getById(1));
 		
@@ -362,7 +362,7 @@ class Project2Team1ApplicationTests {
 	public void getReviewById_Successful() {
 		
 		dummyUser = Optional.ofNullable(new User(12, "spongebob", "squarepants", "sponge", "gary", "pineapple@mail.com", null));
-		Optional<Review> dummy = Optional.of(new Review(1, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser.get()));
+		Optional<Review> dummy = Optional.of(new Review(1, true, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser.get()));
 		
 		when(rRepo.findById(1)).thenReturn(dummy);
 		
@@ -377,7 +377,7 @@ class Project2Team1ApplicationTests {
 	public void getReviewById_Unsuccessful() {
 		
 		dummyUser = Optional.ofNullable(new User(12, "spongebob", "squarepants", "sponge", "gary", "pineapple@mail.com", null));
-		Optional<Review> dummy = Optional.of(new Review(1, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser.get()));
+		Optional<Review> dummy = Optional.of(new Review(1, true, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser.get()));
 		
 		when(rRepo.findById(1)).thenReturn(dummy);
 		Optional<Review> expected = dummy;		
@@ -389,9 +389,9 @@ class Project2Team1ApplicationTests {
 	public void findByParkCode_Successful() {
 		
 		User dummyUser = new User(12, "spongebob", "squarepants", "sponge", "gary", "pineapple@mail.com", null);
-		Review dummy1 = new Review(1, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser); 
-		Review dummy2 = new Review(2, 4, "it was great", new Timestamp(6707090564l), "1234", dummyUser); 
-		Review dummy3 = new Review(3, 4, "it was great", new Timestamp(6707090894l), "ABCD", dummyUser); 
+		Review dummy1 = new Review(1, true, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser); 
+		Review dummy2 = new Review(2, true, 4, "it was great", new Timestamp(6707090564l), "1234", dummyUser); 
+		Review dummy3 = new Review(3, true, 4, "it was great", new Timestamp(6707090894l), "ABCD", dummyUser); 
 		
 		List<Review> reviews = new ArrayList<Review>();
 		reviews.add(dummy3);
@@ -410,9 +410,9 @@ class Project2Team1ApplicationTests {
 	public void findByParkCode_Unsuccessful() {
 		
 		User dummyUser = new User(12, "spongebob", "squarepants", "sponge", "gary", "pineapple@mail.com", null);
-		Review dummy1 = new Review(1, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser); 
-		Review dummy2 = new Review(2, 4, "it was great", new Timestamp(6707090564l), "1234", dummyUser); 
-		Review dummy3 = new Review(3, 4, "it was great", new Timestamp(6707090894l), "ABCD", dummyUser); 
+		Review dummy1 = new Review(1, true, 4, "it was great", new Timestamp(6707090754l), "ABCD", dummyUser); 
+		Review dummy2 = new Review(2, true, 4, "it was great", new Timestamp(6707090564l), "1234", dummyUser); 
+		Review dummy3 = new Review(3, true, 4, "it was great", new Timestamp(6707090894l), "ABCD", dummyUser); 
 		
 		List<Review> reviews = new ArrayList<Review>();
 		reviews.add(dummy3);
