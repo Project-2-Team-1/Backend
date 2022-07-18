@@ -1,8 +1,6 @@
 package com.revature.service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -14,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.revature.data.ReviewRepository;
 import com.revature.data.UserRepository;
 import com.revature.exceptions.ReviewNotFoundException;
-import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Review;
-import com.revature.models.User;
 
 @Service
 public class ReviewService {
@@ -46,7 +42,7 @@ public class ReviewService {
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public Review add(Review r) {		
 		Review review = rRepo.save(r);
-		if (review != null) {
+		if (review.getId() > 0) {
 			log.info("New Review successfully added");
 		} else {
 			log.error("Review not added");
